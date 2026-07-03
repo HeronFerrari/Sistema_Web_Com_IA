@@ -1,0 +1,42 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Produtor {
+  id                    String     @id @default(uuid())
+  cpf                   String     @unique
+  nome                  String
+  cpf_regular           Boolean    @default(true)
+  score_credito         Int
+  solicitacoes_recusadas Int       @default(0)
+  historico_restricoes  Int        @default(0)
+  criado_em             DateTime   @default(now())
+  propostas             Proposta[]
+}
+
+model Propriedade {
+  id                    String     @id @default(uuid())
+  car_codigo            String     @unique
+  car_regular           Boolean    @default(true)
+  divergencia_area_car  Int        @default(0)
+  indice_inadimplencia_regiao Float @default(0.0)
+  propostas             Proposta[]
+}
+
+model Proposta {
+  id                     String      @id @default(uuid())
+  valor_solicitado       Float
+  operacoes_ativas_valor Float       @default(0.0)
+  status_analise         String      
+  tecnica_bloqueio       String      
+  justificativas         String[]    
+  criada_em              DateTime    @default(now())
+  produtor_id            String
+  produtor               Produtor    @relation(fields: [produtor_id], references: [id])
+  propriedade_id         String
+  propriedade            Propriedade @relation(fields: [propriedade_id], references: [id])
+}
