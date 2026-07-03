@@ -1,0 +1,12 @@
+# Ignorar dependências do Node.js
+plataforma-web/node_modules/
+
+# Ignorar arquivos de configuração local e senhas
+plataforma-web/.env
+.env
+
+# Se o seu projeto em Python tiver ambiente virtual, aproveite para proteger também:
+__pycache__/
+*.pyc
+venv/
+.venv/
