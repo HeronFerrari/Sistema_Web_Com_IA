@@ -121,7 +121,7 @@ body {
 
 .topbar-timestamp {
   font-size: 12px;
-  color: var(--txt-3);
+  color: var(--txt-2);
 }
 
 /* ============================================================
@@ -226,7 +226,7 @@ body {
   transition: var(--t);
 }
 
-.field input::placeholder { color: var(--txt-3); }
+.field input::placeholder { color: var(--txt-2); }
 
 .field input:focus {
   border-color: var(--primary);
@@ -236,7 +236,7 @@ body {
 
 .field-hint {
   font-size: 11px;
-  color: var(--txt-3);
+  color: var(--txt-2);
   line-height: 1.4;
   margin-top: -3px;
 }
@@ -275,7 +275,7 @@ body {
   width: 19px;
   height: 19px;
   border-radius: 50%;
-  background: var(--txt-3);
+  background: var(--txt-2);
   transition: var(--t);
 }
 
@@ -618,7 +618,7 @@ input[type="range"].slider::-webkit-slider-thumb:hover {
   border-radius: var(--r-sm);
   background: rgba(255,255,255,.05);
   border: 1px solid var(--border);
-  color: var(--txt-3);
+  color: var(--txt-2);
 }
 
 /* Justificativas */
@@ -636,7 +636,7 @@ input[type="range"].slider::-webkit-slider-thumb:hover {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.8px;
-  color: var(--txt-3);
+  color: var(--txt-2);
   margin-bottom: 14px;
 }
 
@@ -679,7 +679,7 @@ input[type="range"].slider::-webkit-slider-thumb:hover {
 }
 
 .chip strong { display: block; font-size: 14px; color: var(--txt); margin-bottom: 2px; }
-.chip span   { font-size: 11px; color: var(--txt-3); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
+.chip span   { font-size: 11px; color: var(--txt-2); text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
 
 /* Ações do resultado */
 .result-footer {
