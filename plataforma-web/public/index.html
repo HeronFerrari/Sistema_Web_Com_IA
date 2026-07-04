@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PROAGRO Smart — Sistema Inteligente de Análise de Crédito Rural com IA">
+  <title>PROAGRO Smart — Análise de Crédito Rural</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       TELA 1: FORMULÁRIO DE PROPOSTA (tela inicial)
+       ============================================================ -->
+  <section id="screen-form" class="screen active">
+
+    <!-- Barra de navegação superior -->
+    <nav class="topbar">
+      <div class="topbar-brand">
+        <span class="brand-icon">🌱</span>
+        <span class="brand-name">PROAGRO <strong>Smart</strong></span>
+      </div>
+      <div class="topbar-info">
+        <span class="topbar-badge">Motor de IA Ativo</span>
+      </div>
+    </nav>
+
+    <!-- Conteúdo do formulário -->
+    <main class="form-page">
+
+      <header class="page-header">
+        <h1>Nova Proposta de Crédito</h1>
+        <p>Preencha os dados abaixo. O Motor de IA analisará o perfil de risco em tempo real.</p>
+      </header>
+
+      <form id="form-proposta" novalidate>
+
+        <!-- Seção 1: Identificação -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">👤</span>
+            <h2>Identificação do Produtor</h2>
+          </div>
+          <div class="grid-3">
+            <div class="field">
+              <label for="f-nome">Nome Completo</label>
+              <input type="text" id="f-nome" placeholder="Ex: João da Silva" required>
+            </div>
+            <div class="field">
+              <label for="f-cpf">CPF do Produtor</label>
+              <input type="text" id="f-cpf" placeholder="000.000.000-00" maxlength="14" required>
+            </div>
+            <div class="field">
+              <label for="f-car">Código do CAR</label>
+              <input type="text" id="f-car" placeholder="Ex: CAR_Fazenda_A" required>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field toggle-field">
+              <label>CPF Regular?</label>
+              <p class="field-hint">Sem irregularidades na Receita Federal</p>
+              <label class="toggle">
+                <input type="checkbox" id="f-cpf-regular" checked>
+                <span class="toggle-track"></span>
+                <span class="toggle-label" id="lbl-cpf-regular">Sim — Regular</span>
+              </label>
+            </div>
+            <div class="field toggle-field">
+              <label>CAR Regular?</label>
+              <p class="field-hint">Cadastro Ambiental Rural ativo e regularizado</p>
+              <label class="toggle">
+                <input type="checkbox" id="f-car-regular" checked>
+                <span class="toggle-track"></span>
+                <span class="toggle-label" id="lbl-car-regular">Sim — Regular</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 2: Dados Financeiros -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">💰</span>
+            <h2>Dados Financeiros</h2>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-valor">Valor Solicitado (R$)</label>
+              <input type="number" id="f-valor" placeholder="Ex: 150000" min="1" step="1000" required>
+            </div>
+            <div class="field">
+              <label for="f-operacoes">Operações Ativas — Total (R$)</label>
+              <input type="number" id="f-operacoes" placeholder="Ex: 50000" min="0" step="1000" value="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 3: Perfil de Risco -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">📊</span>
+            <h2>Perfil de Risco</h2>
+          </div>
+
+          <!-- Score slider -->
+          <div class="field slider-field">
+            <label for="f-score">
+              Score de Crédito &nbsp;
+              <strong id="score-value">600</strong>
+              <span id="score-tag" class="tag tag-warning">Moderado</span>
+            </label>
+            <input type="range" id="f-score" class="slider" min="300" max="1000" value="600" step="10">
+            <div class="slider-labels">
+              <span class="danger">Baixo (300)</span>
+              <span class="warning">Moderado (650)</span>
+              <span class="success">Bom (1000)</span>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="f-recusadas">Solicitações Recusadas Anteriores</label>
+              <input type="number" id="f-recusadas" min="0" max="20" value="0">
+            </div>
+            <div class="field">
+              <label for="f-inadimplencia">Índice de Inadimplência da Região</label>
+              <input type="number" id="f-inadimplencia" placeholder="Ex: 0.05" min="0.01" max="0.15" step="0.01" value="0.05">
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção 4: Dados da Propriedade -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-icon">🌾</span>
+            <h2>Dados da Propriedade Rural</h2>
+          </div>
+          <div class="grid-2">
+            <div class="field toggle-field">
+              <label>Divergência de Área no CAR?</label>
+              <p class="field-hint">Área declarada diverge do mapeamento por satélite</p>
+              <label class="toggle danger-toggle">
+                <input type="checkbox" id="f-divergencia">
+                <span class="toggle-track"></span>
+                <span class="toggle-label" id="lbl-divergencia">Não — OK</span>
+              </label>
+            </div>
+            <div class="field toggle-field">
+              <label>Histórico de Restrições?</label>
+              <p class="field-hint">Produtor já teve restrições cadastrais no passado</p>
+              <label class="toggle danger-toggle">
+                <input type="checkbox" id="f-restricoes">
+                <span class="toggle-track"></span>
+                <span class="toggle-label" id="lbl-restricoes">Não — Sem restrições</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão de submit -->
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary btn-xl" id="btn-analisar">
+            <span class="btn-text">🤖 Analisar com Inteligência Artificial</span>
+            <span class="btn-loading hidden">Processando análise...</span>
+          </button>
+        </div>
+
+      </form>
+    </main>
+  </section>
+
+
+  <!-- ============================================================
+       TELA 2: RESULTADO / DASHBOARD
+       ============================================================ -->
+  <section id="screen-result" class="screen">
+
+    <!-- Fundo dinâmico colorido por resultado -->
+    <div class="result-bg" id="result-bg"></div>
+
+    <div class="result-page">
+
+      <!-- Barra de navegação -->
+      <nav class="topbar topbar-transparent">
+        <div class="topbar-brand">
+          <span class="brand-icon">🌱</span>
+          <span class="brand-name">PROAGRO <strong>Smart</strong></span>
+        </div>
+        <div class="topbar-info">
+          <span id="result-timestamp" class="topbar-timestamp"></span>
+        </div>
+      </nav>
+
+      <!-- Card central de resultado -->
+      <div class="result-content">
+        <div class="result-card" id="result-card">
+
+          <!-- Veredito principal -->
+          <div class="veredito-header">
+            <div class="veredito-icon" id="veredito-icon"></div>
+            <div class="veredito-titulo" id="veredito-titulo"></div>
+            <div class="veredito-badge" id="veredito-badge"></div>
+          </div>
+
+          <!-- Técnica de IA utilizada -->
+          <div class="tecnica-usada" id="tecnica-usada"></div>
+
+          <!-- Justificativas da análise -->
+          <div class="justificativas-box">
+            <h3 class="box-title">📋 Justificativas da Análise</h3>
+            <ul class="justificativas-list" id="justificativas-list"></ul>
+          </div>
+
+          <!-- Resumo dos dados da proposta -->
+          <div class="proposta-chips" id="proposta-chips"></div>
+
+          <!-- Ação: voltar -->
+          <div class="result-footer">
+            <button class="btn btn-outline" id="btn-nova-analise">← Nova Análise</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
