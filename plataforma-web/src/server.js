@@ -2,10 +2,13 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const routes = require('./routes');
 
 const app = express();
+
+app.use(cors());
 
 // Middleware para o Express entender JSON nativamente
 app.use(express.json());

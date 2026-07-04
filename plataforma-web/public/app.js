@@ -3,7 +3,8 @@
 // Comunica com o back-end Node.js/Express em http://localhost:3000
 // ============================================================
 
-const API_PROPOSTAS = '/propostas';
+// app.js (Front-end)
+const API_PROPOSTAS = 'http://localhost:3000/propostas';
 
 // ============================================================
 // STATE & NAVIGATION
