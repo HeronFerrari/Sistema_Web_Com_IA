@@ -12,16 +12,16 @@ def verificar_fracionamento_car(cpf_alvo, car_alvo):
     # 2. Simulando nossa Base de Dados Relacional (Dados Sintéticos)
     # Relações de propriedade: Quem é dono de qual CAR
     vinculos_propriedade = [
-        ("CPF_Heron", "CAR_Fazenda_A"),
-        ("CPF_Tiago", "CAR_Fazenda_B"),
-        ("CPF_Mariana", "CAR_Fazenda_C"),
-        ("CPF_David", "CAR_Fazenda_C"),  # David e Mariana usam o mesmo CAR!
+        ("11111111111", "999999"), #Fazenda A
+        ("22222222222", "888888"), #Fazenda B
+        ("33333333333", "777777"), #Fazenda C
+        ("44444444444", "777777"),  # Fazenda C
     ]
     
     # Relações familiares/sociedades: Quem é parente de quem
     vinculos_familiares = [
-        ("CPF_Mariana", "CPF_David"), # Parentes/Sócios
-        ("CPF_Heron", "CPF_Tiago")
+        ("33333333333", "44444444444"), # Parentes/Sócios
+        ("11111111111", "22222222222")
     ]
     
     # 3. Alimenta o Grafo com os nós e conexões
