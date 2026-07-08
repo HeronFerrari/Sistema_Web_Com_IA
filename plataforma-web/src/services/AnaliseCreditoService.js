@@ -40,9 +40,15 @@ class AnaliseCreditoService {
       }
     });
 
+
     // 3. Disparar a requisição para a nossa API de IA em Python
     let resultadoIA;
     try {
+      console.log("-> Enviando Payload real para o Python:", {
+        valor_solicitado: dados.valor_solicitado,
+        divergencia_area_car: dados.divergencia_area_car
+      });
+
       const respostaIA = await axios.post(IA_API_URL, {
         cpf_produtor: dados.cpf_produtor,
         car_propriedade: dados.car_propriedade,
@@ -52,11 +58,14 @@ class AnaliseCreditoService {
         car_regular: dados.car_regular,
         score_credito: dados.score_credito,
         solicitacoes_recusadas: dados.solicitacoes_recusadas,
-        divergencia_area_car: dados.divergencia_area_car,
+        divergencia_area_car: (dados.divergencia_area_car == true || dados.divergencia_area_car == 1) ? 1 : 0,
         historico_restricoes: dados.historico_restricoes,
         indice_inadimplencia_regiao: dados.indice_inadimplencia_regiao
       });
+
       resultadoIA = respostaIA.data;
+      console.log("-> RESPOSTA REAL DO MOTOR EM PYTHON:", resultadoIA);
+
     } catch (error) {
       console.error("Erro ao conectar com o motor de IA em Python:", error.message);
       throw new Error("O motor de análise inteligente está temporariamente fora do ar.");

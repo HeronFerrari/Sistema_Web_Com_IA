@@ -1,6 +1,6 @@
-# backend-ia/sistema_especista.py
+# backend-ia/sistema_especialista.py
 
-def avaliar_regras_mcr(valor_solicitado, operacoes_ativas_valor, cpf_regular, car_regular):
+def avaliar_regras_mcr(valor_solicitado, operacoes_ativas_valor, cpf_regular, car_regular, divergencia_area_car):
     """
     Sistema Especialista para validação de regras determinísticas do MCR (Manual de Crédito Rural).
     Retorna se o perfil está 'Aprovado' ou 'Bloqueado', junto com os motivos.
@@ -17,6 +17,10 @@ def avaliar_regras_mcr(valor_solicitado, operacoes_ativas_valor, cpf_regular, ca
     # Regra 2: Verificação de Regularidade do CAR (Cadastro Ambiental Rural)
     if not car_regular:
         bloqueios.append("CAR da propriedade possui pendências ou restrições ambientais.")
+
+    if divergencia_area_car > 0:
+        bloqueios.append(f"Bloqueado pelo Sistema Especialista: Detectada {divergencia_area_car} divergência de área no CAR via satélite.")
+    
 
     # Regra 3: Verificação de estouramento de limite financeiro cumulativo
     valor_total_acumulado = operacoes_ativas_valor + valor_solicitado
@@ -44,10 +48,11 @@ if __name__ == "__main__":
     # Simulando um produtor tentando solicitar R$ 200.000,00
     # Mas ele já tem R$ 350.000,00 em operações ativas (Total: 550.000 -> Estoura o limite!)
     resultado_teste = avaliar_regras_mcr(
-        valor_solicitado=200000.00,
+        valor_solicitado=100000.00,
         operacoes_ativas_valor=350000.00,
         cpf_regular=True,
-        car_regular=True
+        car_regular=True,
+        divergencia_area_car=True
     )
     
     print(f"Resultado da Análise: {resultado_teste['status']}")

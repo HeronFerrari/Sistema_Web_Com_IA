@@ -40,12 +40,15 @@ def raiz():
 # 3. Rota Principal que une as 3 técnicas de IA
 @app.post("/analisar-proposta")
 def analisar_proposta(proposta: PropostaCredito):
+    print("--- PAYLOAD RECEBIDO NO PYTHON ---")
+    print("\n[ATENÇÃO] O PYTHON RECEBEU DIVERGENCIA =", proposta.divergencia_area_car)
     # --- PILAR 1: Sistema Especialista (MCR) ---
     resultado_mcr = avaliar_regras_mcr(
         valor_solicitado=proposta.valor_solicitado,
         operacoes_ativas_valor=proposta.operacoes_ativas_valor,
         cpf_regular=proposta.cpf_regular,
-        car_regular=proposta.car_regular
+        car_regular=proposta.car_regular,
+        divergencia_area_car=proposta.divergencia_area_car
     )
     
     # Se o Sistema Especialista barrar por compliance, já podemos parar aqui
